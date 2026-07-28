@@ -8,7 +8,7 @@ A group of restaurants wishes to transition from their traditional ordering and 
 
 Design and implement a relational database using MS SQL that supports the restaurant’s operations and offers extensive querying capabilities.
 
-### **Design the Relational Schema**:
+## **Design the Relational Schema**:
 
 - **Restaurants**:
     - RestaurantId (PK)
