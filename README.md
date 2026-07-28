@@ -58,4 +58,4 @@ Design and implement a relational database using MS SQL that supports the restau
     - Capacity
 
 ## **Seed Data**:   
-Seed with fictional data: Populate 50 restaurants, 1000 menu items, and 1500 order items, 500 orders, 100 employees, 500 reservations, 400 customers, 100 tables records. The data generated using stored procedures to run it any time with T-SQL scripts;
+Seed with fictional data: Populate 50 restaurants, 1000 menu items, and 1500 order items, 500 orders, 100 employees, 500 reservations, 400 customers, 100 tables records. The data generated using stored procedures to run it any time with T-SQL scripts.
