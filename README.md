@@ -7,3 +7,52 @@ A group of restaurants wishes to transition from their traditional ordering and 
 ## **Objective**:
 
 Design and implement a relational database using MS SQL that supports the restaurant’s operations and offers extensive querying capabilities.
+
+### **Design the Relational Schema using MS SQL**:
+
+- **Restaurants**:
+    - RestaurantId (PK)
+    - Name
+    - Address
+    - PhoneNumber
+    - OpeningHours
+- **MenuItems:**
+    - ItemId (PK)
+    - RestaurantId (FK)
+    - Name
+    - Description
+    - Price
+- **OrderItems**:
+    - OrderItemId (PK)
+    - OrderId (FK)
+    - ItemId
+    - Quantity
+- **Orders:**
+    - OrderId (PK)
+    - ReservationId (FK)
+    - EmployeeId (FK)
+    - OrderDate
+    - TotalAmount
+- **Employees**:
+    - EmployeeId (PK)
+    - RestaurantId (FK)
+    - FirstName
+    - LastName
+    - Position
+- **Reservations**:
+    - ReservationId (PK)
+    - CustomerId (FK)
+    - RestaurantId (FK)
+    - TableId (FK)
+    - ReservationDate
+    - PartySize
+- **Customers**:
+    - CustomerId (PK)
+    - FistName
+    - LastName
+    - Email
+    - PhoneNumber
+- **Tables**:
+    - TableId (PK)
+    - RestaurantId (FK)
+    - Capacity
