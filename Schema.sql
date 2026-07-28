@@ -36,6 +36,7 @@ CREATE TABLE Employees
     CONSTRAINT FK_Employees_Restaurants FOREIGN KEY (RestaurantId) 
         REFERENCES Restaurants(RestaurantId)
 );
+GO
 
 CREATE TABLE Tables
 (
