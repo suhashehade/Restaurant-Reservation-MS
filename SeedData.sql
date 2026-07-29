@@ -1,13 +1,37 @@
 USE RestaurantReservationDB;
 GO
 
+
+DELETE FROM OrderItems;
+DELETE FROM Orders;
+DELETE FROM Reservations;
+DELETE FROM MenuItems;
+DELETE FROM Customers;
+DELETE FROM [Tables];
+DELETE FROM Employees;
+DELETE FROM Restaurants;
+
+DBCC CHECKIDENT ('OrderItems', RESEED, 0);
+DBCC CHECKIDENT ('Orders', RESEED, 0);
+DBCC CHECKIDENT ('Reservations', RESEED, 0);
+DBCC CHECKIDENT ('MenuItems', RESEED, 0);
+DBCC CHECKIDENT ('Customers', RESEED, 0);
+DBCC CHECKIDENT ('[Tables]', RESEED, 0);
+DBCC CHECKIDENT ('Employees', RESEED, 0);
+DBCC CHECKIDENT ('Restaurants', RESEED, 0);
+GO
+
+
 DECLARE @i INT = 1;
 DECLARE @RestId INT;
 DECLARE @TableId INT;
 DECLARE @OrderId INT;
 DECLARE @OrderRestId INT;
 DECLARE @ItemId INT;
+DECLARE @ResId INT;
 
+
+SET @i = 1;
 WHILE @i <= 50 
 BEGIN
     INSERT INTO Restaurants (Name, Address, PhoneNumber, OpeningHours)
@@ -84,9 +108,9 @@ BEGIN
     INSERT INTO Reservations (RestaurantId, CustomerId, TableId, ReservationDate, PartySize)
     VALUES (
         @RestId,
-        ((@i - 1) % 400) + 1,
+        ((@i - 1) % 300) + 1,
         @TableId,
-        DATEADD(DAY, - (@i % 30), GETDATE()),
+        DATEADD(DAY, - (@i % 60) + 15, GETDATE()),
         (ABS(CHECKSUM(NEWID())) % 5) + 1
     );
     SET @i = @i + 1;
@@ -96,11 +120,22 @@ END;
 SET @i = 1;
 WHILE @i <= 500
 BEGIN
+    IF @i <= 300
+    BEGIN
+        SET @ResId = @i + 100;
+    END
+    ELSE
+    BEGIN
+        SET @ResId = (@i - 300) + 400;
+    END
+
+    SELECT @RestId = RestaurantId FROM Reservations WHERE ReservationId = @ResId;
+
     INSERT INTO Orders (ReservationId, EmployeeId, OrderDate, TotalAmount)
     VALUES (
-        @i,
-        ((@i - 1) % 100) + 1,
-        DATEADD(DAY, - (@i % 30), GETDATE()),
+        @ResId,
+        ((@RestId - 1) * 2) + (@i % 2) + 1,
+        DATEADD(MINUTE, (@i * 5), GETDATE()),
         0.00
     );
     SET @i = @i + 1;
@@ -110,8 +145,13 @@ END;
 SET @i = 1;
 WHILE @i <= 1500
 BEGIN
-    SET @OrderId = ((@i - 1) / 3) + 1;
-    SET @OrderRestId = ((@OrderId - 1) % 50) + 1;
+    SET @OrderId = ((@i - 1) / 3) + 1; 
+    
+    SELECT @OrderRestId = R.RestaurantId 
+    FROM Orders O 
+    JOIN Reservations R ON O.ReservationId = R.ReservationId 
+    WHERE O.OrderId = @OrderId;
+
     SET @ItemId = ((@OrderRestId - 1) * 20) + ((@i % 20) + 1);
 
     INSERT INTO OrderItems (OrderId, ItemId, Quantity)
@@ -134,5 +174,5 @@ JOIN (
     GROUP BY OI.OrderId
 ) T ON O.OrderId = T.OrderId;
 
-PRINT 'Database successfully seeded!';
+PRINT 'Database successfully seeded with realistic ERD cardinality scenarios!';
 GO
