@@ -8,6 +8,8 @@ SELECT
     e.LastName,
     e.Position,
     r.RestaurantId,
-    r.Name AS RestaurantName
+    r.Name AS RestaurantName,
+    r.PhoneNumber,
+    r.OpeningHours
 FROM Employees e 
 INNER JOIN Restaurants r ON e.RestaurantId = r.RestaurantId;
