@@ -103,7 +103,7 @@ END;
 SET @i = 1;
 WHILE @i <= 500
 BEGIN
-    SET @RestId = ((@i - 1) % 50) + 1;
+    SET @RestId = (ABS(CHECKSUM(NEWID())) % 50) + 1;
     SET @TableId = (@RestId * 2) - (@i % 2);
 
     INSERT INTO Reservations (RestaurantId, CustomerId, TableId, ReservationDate, PartySize)
@@ -116,6 +116,7 @@ BEGIN
     );
     SET @i = @i + 1;
 END;
+
 
 SET @i = 1;
 WHILE @i <= 500
