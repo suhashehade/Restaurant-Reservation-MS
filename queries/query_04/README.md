@@ -22,6 +22,6 @@ GO
 
 ### **Rationale behind the query** ###
 
-Apply ```INNER JOIN``` between ```Orders```, ```OrderItems```, and ```MenuItems``` tables, to show the orders with its orders items with associated menu items details.
+Apply ```INNER JOIN``` between ```Orders```, ```OrderItems```, and ```MenuItems``` tables, to show the menu items details.
 
 Apply ```(oi.Quantity * mi.Price) AS SubTotal``` to show the subTotal of each order item from the menu item price.
