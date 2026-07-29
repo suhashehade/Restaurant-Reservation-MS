@@ -116,7 +116,6 @@ BEGIN
     SET @i = @i + 1;
 END;
 
-
 SET @i = 1;
 WHILE @i <= 500
 BEGIN
@@ -126,7 +125,7 @@ BEGIN
     END
     ELSE
     BEGIN
-        SET @ResId = (@i - 300) + 400;
+        SET @ResId = ((@i - 301) % 100) + 401;
     END
 
     SELECT @RestId = RestaurantId FROM Reservations WHERE ReservationId = @ResId;
