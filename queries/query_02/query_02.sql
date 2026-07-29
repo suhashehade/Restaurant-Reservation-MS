@@ -3,3 +3,4 @@ GO
 
 SELECT * FROM Employees
 WHERE Position='Manager';
+GO

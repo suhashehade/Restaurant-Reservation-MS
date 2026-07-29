@@ -9,6 +9,7 @@ GO
 
 SELECT * FROM Employees
 WHERE Position='Manager';
+GO
 ```
 
 ### **Rationale behind the query** ###
