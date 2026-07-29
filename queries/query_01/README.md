@@ -14,5 +14,5 @@ GO
 ```
 
 ### **Rationale behind the query** ###
-I need all reservations for a specific customers, so I have to retrive a specific records or a range, I used ```BETWEEN```, also I can use ```IN```.
+I need all reservations for a specific customers, so I have to retrive a specific records using ```IN``` or a range of records using ```BETWEEN```.
 
