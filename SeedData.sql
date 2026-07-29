@@ -29,6 +29,7 @@ DECLARE @OrderId INT;
 DECLARE @OrderRestId INT;
 DECLARE @ItemId INT;
 DECLARE @ResId INT;
+DECLARE @WaiterId INT;
 
 
 SET @i = 1;
@@ -130,10 +131,14 @@ BEGIN
 
     SELECT @RestId = RestaurantId FROM Reservations WHERE ReservationId = @ResId;
 
+    SELECT TOP 1 @WaiterId = EmployeeId 
+    FROM Employees 
+    WHERE RestaurantId = @RestId AND Position = N'Waiter';
+
     INSERT INTO Orders (ReservationId, EmployeeId, OrderDate, TotalAmount)
     VALUES (
         @ResId,
-        ((@RestId - 1) * 2) + (@i % 2) + 1,
+        @WaiterId,
         DATEADD(MINUTE, (@i * 5), GETDATE()),
         0.00
     );
