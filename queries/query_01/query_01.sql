@@ -3,5 +3,5 @@ GO
 
 SELECT * FROM Reservations r INNER JOIN Customers c
 ON r.CustomerId = c.CustomerId 
-WHERE c.CustomerId BETWEEN 1 AND 10;
+WHERE c.CustomerId IN (1, 5, 20, 43);
 GO
