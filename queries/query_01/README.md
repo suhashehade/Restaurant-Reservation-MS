@@ -1,4 +1,4 @@
-## **List of Reservations** ##
+## **List of Reservations: Retrieve all reservations for a specific customers.** ##
 
 
 ### **SQL** ###
@@ -14,5 +14,5 @@ GO
 ```
 
 ### **Rationale behind the query** ###
-I need all reservations for a specific customers, so I have to retrive a specific records or a range, I use ```sql BETWEEN``` and also I can use ```sql IN```.
+I need all reservations for a specific customers, so I have to retrive a specific records or a range, I use ```BETWEEN``` and also I can use ```IN```.
 
