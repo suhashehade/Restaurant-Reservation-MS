@@ -1,4 +1,4 @@
-## **List of Orders and Menu Items: Lists the orders placed on a specific given reservation along with the associated menu items.** ##
+## **List of Ordered Menu Items: Lists the menu items ordered by a specific reservation.** ##
 
 
 ### **SQL** ###
