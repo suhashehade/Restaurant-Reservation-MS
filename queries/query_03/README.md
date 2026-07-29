@@ -55,8 +55,8 @@ GO
 
 Apply ```INNER JOIN``` between ```Orders```, ```OrderItems```, and ```MenuItems``` tables, to show the orders with its orders items with associated menu items details.
 
-Apply ``` (oi.Quantity * mi.Price) AS SubTotal``` to show the subTotal of each order item from the menu item price.
+Apply ```(oi.Quantity * mi.Price) AS SubTotal``` to show the subTotal of each order item from the menu item price.
 
 Result:
-Some of reservations haven't orders (ReservationId: 1 - 100) and some of them have one order (ReservationId: 101 - 400) or many orders (ReservationId: 401 - 500), so the first ```SELECT``` have zero rows because no orders, the second ```SELECT``` have 3 rows because it have one order with 3 order items, and the last ```SELECT``` have 6 rows represent 2 orders, each order have 3 order items, and the orders items associated menu items.
+Some of reservations haven't orders (ReservationId: 1 - 100) and some of them have one order (ReservationId: 101 - 400) or many orders (ReservationId: 401 - 500), so the first ```SELECT``` have zero rows because no orders, the second ```SELECT``` have 3 rows because it have one order with 3 order items, and the last ```SELECT``` have 6 rows represent 2 orders, each order have 3 order items, and the orders items associated menu items, while each order item have one and only one menu item.
 
