@@ -35,4 +35,4 @@ Use View to retrieve the list of reservations.
 
 Use ```CREATE VIEW``` for the first time of view creation and use ```ALTER VIEW``` to run the file again.
 
-Run the ```SELECT``` on the virsual table ```Reservation_Report```.
+Run the ```SELECT``` on the virtual table ```Reservation_Report```.
