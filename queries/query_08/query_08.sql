@@ -1,3 +1,6 @@
+USE RestaurantReservationDB; 
+GO
+
 WITH Reservation_Order_CTE AS (
   SELECT COUNT(ReservationId) AS OrdersCount, ReservationId  FROM Orders GROUP BY ReservationId HAVING COUNT(ReservationId) >= 2
 )
