@@ -54,7 +54,13 @@ BEGIN
         ((@i - 1) % 50) + 1,
         N'EmpFirst' + CAST(@i AS NVARCHAR),
         N'EmpLast' + CAST(@i AS NVARCHAR),
-        CASE WHEN @i % 3 = 0 THEN N'Manager' WHEN @i % 3 = 1 THEN N'Waiter' ELSE N'Chef' END
+        CASE (@i % 5)
+            WHEN 0 THEN N'VIPOrdersWaiter'
+            WHEN 1 THEN N'StandardWaiter'
+            WHEN 2 THEN N'AssistantWaiter'
+            WHEN 3 THEN N'Chef'
+            ELSE N'Manager'
+        END
     );
     SET @i = @i + 1;
 END;
@@ -138,7 +144,7 @@ BEGIN
 
     SELECT TOP 1 @WaiterId = EmployeeId 
     FROM Employees 
-    WHERE RestaurantId = @RestId AND Position = N'Waiter';
+    WHERE RestaurantId = @RestId AND Position LIKE N'%Waiter%';
 
     INSERT INTO Orders (ReservationId, EmployeeId, OrderDate, TotalAmount)
     VALUES (
