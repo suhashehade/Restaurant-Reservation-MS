@@ -35,12 +35,16 @@ SELECT dbo.fn_CalculateRevenue(2) AS TotalRevenue;
 
 ### **Rationale behind the query** ###
 
-To get the total amount from the orders for a restuarnat should make ```INNER JOIN``` between the orders and reservations tables.
+To define the function I used ```CREATE``` and to update it I used ```ALTER```.
 
-To calculate the sum, use ```SUM``` aggregate function with ```GROUP BY``` the restaurant id, and store the result in ```@TotalRevenue```, then return it.
+To get the total amount from the orders for a restuarnat I should make ```INNER JOIN``` between the orders and reservations tables.
 
-To use this user defined function (database function), call dbo which is the shcema name that it is belong to.
+To calculate the sum, I used ```SUM``` aggregate function with ```GROUP BY``` the restaurant id, and stored the result in ```@TotalRevenue```, then returned it.
+
+To use this user defined function (database function), I called dbo which is the shcema name that it is belong to.
 
 The function stored inside Databases -> ```RestaurantReservationDB``` -> Programmability -> Functions -> Scalar-valued Functions.
+
+
 
 
