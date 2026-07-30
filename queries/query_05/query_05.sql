@@ -2,5 +2,5 @@ USE RestaurantReservationDB;
 GO
 
 SELECT AVG(TotalAmount) AS AVG FROM Orders
-WHERE EmployeeId=52;
+WHERE EmployeeId=30;
 GO
