@@ -87,17 +87,21 @@ END;
 
 
 SET @i = 1;
+
 WHILE @i <= 1000
 BEGIN
+  SET @RestId = (ABS(CHECKSUM(NEWID())) % 50) + 1;
+
   INSERT INTO MenuItems (RestaurantId, Name, Description, Price)
   VALUES (
-        ((@i - 1) % 50) + 1,
+        @RestId,
         N'Item ' + CAST(@i AS NVARCHAR),
         N'Delicious dish description ' + CAST(@i AS NVARCHAR),
         CAST((ABS(CHECKSUM(NEWID())) % 45 + 5) + 0.99 AS DECIMAL(10,2))
   );
   SET @i = @i + 1;
 END;
+
 
 
 SET @i = 1;
