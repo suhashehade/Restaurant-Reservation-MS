@@ -1,4 +1,8 @@
-## **Retrieve Reservations Report with Views: Use a view to list all reservations information including restaurants and customers information.** ##
+## **Retrieve Reservations Report with Views** ##
+
+### **Description** ###
+
+Use a view to list all reservations information including restaurants and customers information.
 
 ### **SQL View** ###
 
