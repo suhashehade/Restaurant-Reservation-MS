@@ -1,4 +1,8 @@
-## **Retrieve Employees details with Views: Use a view to list all employees information including their restaurants details** ##
+## **Retrieve Employees details with Views** ##
+
+### **Description** ###
+
+Use a view to list all employees information including their restaurants details.
 
 ### **SQL View** ###
 
