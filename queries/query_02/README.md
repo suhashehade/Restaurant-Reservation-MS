@@ -1,5 +1,8 @@
-## **List of Managers: Retrieve all employees holding Manager position.** ##
+## **List of Managers** ##
 
+### **Description** ###
+
+Retrieve all employees holding Manager position.
 
 ### **SQL** ###
 
