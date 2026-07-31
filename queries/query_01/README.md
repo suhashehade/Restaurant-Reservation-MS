@@ -1,4 +1,7 @@
-## **List of Reservations: Retrieve all reservations for a specific customers.** ##
+## **List of Reservations** ##
+
+### **Description** ###
+Retrieve all reservations for a specific customers.
 
 
 ### **SQL** ###
