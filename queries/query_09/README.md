@@ -1,4 +1,8 @@
-## **Restaurant Popularity using Aggregation: Rank restaurants by the reservation frequency.** ##
+## **Restaurant Popularity using Aggregation** ##
+
+### **Description** ###
+
+Rank restaurants by the reservation frequency.
 
 ### **SQL Query** ###
 
