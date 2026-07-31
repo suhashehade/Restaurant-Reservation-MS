@@ -1,5 +1,8 @@
-## **List of Ordered Menu Items: Lists the menu items ordered by a specific reservation.** ##
+## **List of Ordered Menu Items** ##
 
+### **Description** ###
+
+Lists the menu items ordered by a specific reservation.
 
 ### **SQL** ###
 
