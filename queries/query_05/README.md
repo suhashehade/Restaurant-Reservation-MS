@@ -1,5 +1,8 @@
-## **Calculate Average Order Amount: Calculate the average order amount made through a specific employee.** ##
+## **Calculate Average Order Amount** ##
 
+### **Description** ###
+
+Calculate the average order amount made through a specific employee.
 
 ### **SQL** ###
 
