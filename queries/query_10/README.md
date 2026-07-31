@@ -1,4 +1,8 @@
-## **Popular Menu Item Analysis using Joins and Window Functions: Identify the most popular menu item for each restaurant for a given month.** ##
+## **Popular Menu Item Analysis using Joins and Window Functions** ##
+
+### **Description** ###
+
+Identify the most popular menu item for each restaurant for a given month.
 
 ### **SQL Query** ###
 
