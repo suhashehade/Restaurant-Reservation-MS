@@ -4,7 +4,6 @@
 
 Identify reservations which have 2 or more orders using CTEs.
 
-
 ### **SQL Query** ###
 
 ```sql

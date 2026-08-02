@@ -4,7 +4,6 @@
 
 Identify the most popular menu item for each restaurant for a given month.
 
-
 ### **SQL Query** ###
 
 ```sql

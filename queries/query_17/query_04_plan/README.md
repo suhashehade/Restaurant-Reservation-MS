@@ -4,7 +4,6 @@
 
 Lists the menu items ordered by a specific reservation.
 
-
 ### **SQL Query** ###
 
 ```sql

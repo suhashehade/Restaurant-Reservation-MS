@@ -4,7 +4,6 @@
 
 Lists the orders placed on a specific given reservation along with the associated menu items.
 
-
 ### **SQL Query** ###
 
 ```sql
