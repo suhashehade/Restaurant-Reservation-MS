@@ -5,7 +5,6 @@
 Make Tech-Lib Faster:
     Create the needed Indexes to the the project you built earlier.
 
-
 ### **SQL Query** ###
 
 ```sql
