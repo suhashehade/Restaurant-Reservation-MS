@@ -1,0 +1,252 @@
+<ShowPlanXML xmlns="http://schemas.microsoft.com/sqlserver/2004/07/showplan" Version="1.599" Build="17.0.1000.7">
+  <BatchSequence>
+    <Batch>
+      <Statements>
+        <StmtSimple StatementText="&#xD;&#xA;SELECT &#xD;&#xA;    o.ReservationId,&#xD;&#xA;    mi.Name AS MenuItemName,&#xD;&#xA;    mi.Price,&#xD;&#xA;    mi.Description,&#xD;&#xA;    (oi.Quantity * mi.Price) AS SubTotal&#xD;&#xA;FROM Orders o &#xD;&#xA;INNER JOIN OrderItems oi ON o.OrderId=oi.OrderId&#xD;&#xA;INNER JOIN MenuItems mi ON oi.ItemId = mi.ItemId&#xD;&#xA;WHERE o.ReservationId=403" StatementId="1" StatementCompId="1" StatementType="SELECT" RetrievedFromCache="false" StatementSubTreeCost="0.0346045" StatementEstRows="6" SecurityPolicyApplied="false" StatementOptmLevel="FULL" QueryHash="0xCC1028B8D2D48050" QueryPlanHash="0x8DC7A8B6B2462BFC" StatementOptmEarlyAbortReason="GoodEnoughPlanFound" CardinalityEstimationModelVersion="170">
+          <StatementSetOptions QUOTED_IDENTIFIER="true" ARITHABORT="true" CONCAT_NULL_YIELDS_NULL="true" ANSI_NULLS="true" ANSI_PADDING="true" ANSI_WARNINGS="true" NUMERIC_ROUNDABORT="false"></StatementSetOptions>
+          <QueryPlan CachedPlanSize="48" CompileTime="14" CompileCPU="14" CompileMemory="616">
+            <MemoryGrantInfo SerialRequiredMemory="0" SerialDesiredMemory="0" GrantedMemory="0" MaxUsedMemory="0"></MemoryGrantInfo>
+            <OptimizerHardwareDependentProperties EstimatedAvailableMemoryGrant="165303" EstimatedPagesCached="206629" EstimatedAvailableDegreeOfParallelism="10" MaxCompileMemory="25064"></OptimizerHardwareDependentProperties>
+            <OptimizerStatsUsage>
+              <StatisticsInfo LastUpdate="2026-08-02T12:29:09.53" ModificationCount="0" SamplingPercent="100" Statistics="[OrderItems_OrderId]" Table="[OrderItems]" Schema="[dbo]" Database="[RestaurantReservationDB]"></StatisticsInfo>
+              <StatisticsInfo LastUpdate="2026-07-30T12:19:57.39" ModificationCount="9" SamplingPercent="100" Statistics="[PK__Orders__C3905BCFB2D65208]" Table="[Orders]" Schema="[dbo]" Database="[RestaurantReservationDB]"></StatisticsInfo>
+              <StatisticsInfo LastUpdate="2026-07-30T12:19:57.38" ModificationCount="0" SamplingPercent="100" Statistics="[PK__MenuItem__727E838B98BFAFC1]" Table="[MenuItems]" Schema="[dbo]" Database="[RestaurantReservationDB]"></StatisticsInfo>
+              <StatisticsInfo LastUpdate="2026-07-30T12:19:57.38" ModificationCount="0" SamplingPercent="100" Statistics="[_WA_Sys_00000003_5FB337D6]" Table="[OrderItems]" Schema="[dbo]" Database="[RestaurantReservationDB]"></StatisticsInfo>
+              <StatisticsInfo LastUpdate="2026-07-30T12:19:57.39" ModificationCount="0" SamplingPercent="100" Statistics="[_WA_Sys_00000002_5FB337D6]" Table="[OrderItems]" Schema="[dbo]" Database="[RestaurantReservationDB]"></StatisticsInfo>
+              <StatisticsInfo LastUpdate="2026-08-02T12:29:09.57" ModificationCount="0" SamplingPercent="100" Statistics="[Orders_ReservationId]" Table="[Orders]" Schema="[dbo]" Database="[RestaurantReservationDB]"></StatisticsInfo>
+              <StatisticsInfo LastUpdate="2026-08-02T12:29:09.56" ModificationCount="0" SamplingPercent="100" Statistics="[OrderItems_ItemId]" Table="[OrderItems]" Schema="[dbo]" Database="[RestaurantReservationDB]"></StatisticsInfo>
+            </OptimizerStatsUsage>
+            <RelOp NodeId="0" PhysicalOp="Compute Scalar" LogicalOp="Compute Scalar" EstimateRows="6" EstimateIO="0" EstimateCPU="6e-07" AvgRowSize="189" EstimatedTotalSubtreeCost="0.0346045" Parallel="0" EstimateRebinds="0" EstimateRewinds="0" EstimatedExecutionMode="Row">
+              <OutputList>
+                <ColumnReference Database="[RestaurantReservationDB]" Schema="[dbo]" Table="[Orders]" Alias="[o]" Column="ReservationId"></ColumnReference>
+                <ColumnReference Database="[RestaurantReservationDB]" Schema="[dbo]" Table="[MenuItems]" Alias="[mi]" Column="Name"></ColumnReference>
+                <ColumnReference Database="[RestaurantReservationDB]" Schema="[dbo]" Table="[MenuItems]" Alias="[mi]" Column="Description"></ColumnReference>
+                <ColumnReference Database="[RestaurantReservationDB]" Schema="[dbo]" Table="[MenuItems]" Alias="[mi]" Column="Price"></ColumnReference>
+                <ColumnReference Column="Expr1003"></ColumnReference>
+              </OutputList>
+              <ComputeScalar>
+                <DefinedValues>
+                  <DefinedValue>
+                    <ColumnReference Column="Expr1003"></ColumnReference>
+                    <ScalarOperator ScalarString="[Expr1004]*[RestaurantReservationDB].[dbo].[MenuItems].[Price] as [mi].[Price]">
+                      <Arithmetic Operation="MULT">
+                        <ScalarOperator>
+                          <Identifier>
+                            <ColumnReference Column="Expr1004"></ColumnReference>
+                          </Identifier>
+                        </ScalarOperator>
+                        <ScalarOperator>
+                          <Identifier>
+                            <ColumnReference Database="[RestaurantReservationDB]" Schema="[dbo]" Table="[MenuItems]" Alias="[mi]" Column="Price"></ColumnReference>
+                          </Identifier>
+                        </ScalarOperator>
+                      </Arithmetic>
+                    </ScalarOperator>
+                  </DefinedValue>
+                </DefinedValues>
+                <RelOp NodeId="1" PhysicalOp="Nested Loops" LogicalOp="Inner Join" EstimateRows="6" EstimateIO="0" EstimateCPU="2.508e-05" AvgRowSize="185" EstimatedTotalSubtreeCost="0.0346039" Parallel="0" EstimateRebinds="0" EstimateRewinds="0" EstimatedExecutionMode="Row">
+                  <OutputList>
+                    <ColumnReference Database="[RestaurantReservationDB]" Schema="[dbo]" Table="[Orders]" Alias="[o]" Column="ReservationId"></ColumnReference>
+                    <ColumnReference Database="[RestaurantReservationDB]" Schema="[dbo]" Table="[MenuItems]" Alias="[mi]" Column="Name"></ColumnReference>
+                    <ColumnReference Database="[RestaurantReservationDB]" Schema="[dbo]" Table="[MenuItems]" Alias="[mi]" Column="Description"></ColumnReference>
+                    <ColumnReference Database="[RestaurantReservationDB]" Schema="[dbo]" Table="[MenuItems]" Alias="[mi]" Column="Price"></ColumnReference>
+                    <ColumnReference Column="Expr1004"></ColumnReference>
+                  </OutputList>
+                  <NestedLoops Optimized="0">
+                    <OuterReferences>
+                      <ColumnReference Database="[RestaurantReservationDB]" Schema="[dbo]" Table="[OrderItems]" Alias="[oi]" Column="ItemId"></ColumnReference>
+                    </OuterReferences>
+                    <RelOp NodeId="2" PhysicalOp="Compute Scalar" LogicalOp="Compute Scalar" EstimateRows="6" EstimateIO="0" EstimateCPU="6e-07" AvgRowSize="24" EstimatedTotalSubtreeCost="0.0200909" Parallel="0" EstimateRebinds="0" EstimateRewinds="0" EstimatedExecutionMode="Row">
+                      <OutputList>
+                        <ColumnReference Database="[RestaurantReservationDB]" Schema="[dbo]" Table="[Orders]" Alias="[o]" Column="ReservationId"></ColumnReference>
+                        <ColumnReference Database="[RestaurantReservationDB]" Schema="[dbo]" Table="[OrderItems]" Alias="[oi]" Column="ItemId"></ColumnReference>
+                        <ColumnReference Column="Expr1004"></ColumnReference>
+                      </OutputList>
+                      <ComputeScalar>
+                        <DefinedValues>
+                          <DefinedValue>
+                            <ColumnReference Column="Expr1004"></ColumnReference>
+                            <ScalarOperator ScalarString="CONVERT_IMPLICIT(decimal(10,0),[RestaurantReservationDB].[dbo].[OrderItems].[Quantity] as [oi].[Quantity],0)">
+                              <Convert DataType="decimal" Precision="10" Scale="0" Style="0" Implicit="1">
+                                <ScalarOperator>
+                                  <Identifier>
+                                    <ColumnReference Database="[RestaurantReservationDB]" Schema="[dbo]" Table="[OrderItems]" Alias="[oi]" Column="Quantity"></ColumnReference>
+                                  </Identifier>
+                                </ScalarOperator>
+                              </Convert>
+                            </ScalarOperator>
+                          </DefinedValue>
+                        </DefinedValues>
+                        <RelOp NodeId="3" PhysicalOp="Nested Loops" LogicalOp="Inner Join" EstimateRows="6" EstimateIO="0" EstimateCPU="2.508e-05" AvgRowSize="19" EstimatedTotalSubtreeCost="0.0200903" Parallel="0" EstimateRebinds="0" EstimateRewinds="0" EstimatedExecutionMode="Row">
+                          <OutputList>
+                            <ColumnReference Database="[RestaurantReservationDB]" Schema="[dbo]" Table="[Orders]" Alias="[o]" Column="ReservationId"></ColumnReference>
+                            <ColumnReference Database="[RestaurantReservationDB]" Schema="[dbo]" Table="[OrderItems]" Alias="[oi]" Column="ItemId"></ColumnReference>
+                            <ColumnReference Database="[RestaurantReservationDB]" Schema="[dbo]" Table="[OrderItems]" Alias="[oi]" Column="Quantity"></ColumnReference>
+                          </OutputList>
+                          <NestedLoops Optimized="0">
+                            <OuterReferences>
+                              <ColumnReference Database="[RestaurantReservationDB]" Schema="[dbo]" Table="[OrderItems]" Alias="[oi]" Column="OrderItemId"></ColumnReference>
+                            </OuterReferences>
+                            <RelOp NodeId="4" PhysicalOp="Nested Loops" LogicalOp="Inner Join" EstimateRows="6" EstimateIO="0" EstimateCPU="2.508e-05" AvgRowSize="15" EstimatedTotalSubtreeCost="0.00790178" Parallel="0" EstimateRebinds="0" EstimateRewinds="0" EstimatedExecutionMode="Row">
+                              <OutputList>
+                                <ColumnReference Database="[RestaurantReservationDB]" Schema="[dbo]" Table="[Orders]" Alias="[o]" Column="ReservationId"></ColumnReference>
+                                <ColumnReference Database="[RestaurantReservationDB]" Schema="[dbo]" Table="[OrderItems]" Alias="[oi]" Column="OrderItemId"></ColumnReference>
+                              </OutputList>
+                              <NestedLoops Optimized="0">
+                                <OuterReferences>
+                                  <ColumnReference Database="[RestaurantReservationDB]" Schema="[dbo]" Table="[Orders]" Alias="[o]" Column="OrderId"></ColumnReference>
+                                </OuterReferences>
+                                <RelOp NodeId="5" PhysicalOp="Index Seek" LogicalOp="Index Seek" EstimateRows="2" EstimatedRowsRead="2" EstimateIO="0.003125" EstimateCPU="0.0001592" AvgRowSize="15" EstimatedTotalSubtreeCost="0.0032842" TableCardinality="505" Parallel="0" EstimateRebinds="0" EstimateRewinds="0" EstimatedExecutionMode="Row">
+                                  <OutputList>
+                                    <ColumnReference Database="[RestaurantReservationDB]" Schema="[dbo]" Table="[Orders]" Alias="[o]" Column="OrderId"></ColumnReference>
+                                    <ColumnReference Database="[RestaurantReservationDB]" Schema="[dbo]" Table="[Orders]" Alias="[o]" Column="ReservationId"></ColumnReference>
+                                  </OutputList>
+                                  <IndexScan Ordered="1" ScanDirection="FORWARD" ForcedIndex="0" ForceSeek="0" ForceScan="0" NoExpandHint="0" Storage="RowStore">
+                                    <DefinedValues>
+                                      <DefinedValue>
+                                        <ColumnReference Database="[RestaurantReservationDB]" Schema="[dbo]" Table="[Orders]" Alias="[o]" Column="OrderId"></ColumnReference>
+                                      </DefinedValue>
+                                      <DefinedValue>
+                                        <ColumnReference Database="[RestaurantReservationDB]" Schema="[dbo]" Table="[Orders]" Alias="[o]" Column="ReservationId"></ColumnReference>
+                                      </DefinedValue>
+                                    </DefinedValues>
+                                    <Object Database="[RestaurantReservationDB]" Schema="[dbo]" Table="[Orders]" Index="[Orders_ReservationId]" Alias="[o]" IndexKind="NonClustered" Storage="RowStore"></Object>
+                                    <SeekPredicates>
+                                      <SeekPredicateNew>
+                                        <SeekKeys>
+                                          <Prefix ScanType="EQ">
+                                            <RangeColumns>
+                                              <ColumnReference Database="[RestaurantReservationDB]" Schema="[dbo]" Table="[Orders]" Alias="[o]" Column="ReservationId"></ColumnReference>
+                                            </RangeColumns>
+                                            <RangeExpressions>
+                                              <ScalarOperator ScalarString="(403)">
+                                                <Const ConstValue="(403)"></Const>
+                                              </ScalarOperator>
+                                            </RangeExpressions>
+                                          </Prefix>
+                                        </SeekKeys>
+                                      </SeekPredicateNew>
+                                    </SeekPredicates>
+                                  </IndexScan>
+                                </RelOp>
+                                <RelOp NodeId="6" PhysicalOp="Index Seek" LogicalOp="Index Seek" EstimateRows="3" EstimatedRowsRead="3" EstimateIO="0.003125" EstimateCPU="0.0001603" AvgRowSize="11" EstimatedTotalSubtreeCost="0.0045925" TableCardinality="1500" Parallel="0" EstimateRebinds="1" EstimateRewinds="0" EstimatedExecutionMode="Row">
+                                  <OutputList>
+                                    <ColumnReference Database="[RestaurantReservationDB]" Schema="[dbo]" Table="[OrderItems]" Alias="[oi]" Column="OrderItemId"></ColumnReference>
+                                  </OutputList>
+                                  <IndexScan Ordered="1" ScanDirection="FORWARD" ForcedIndex="0" ForceSeek="0" ForceScan="0" NoExpandHint="0" Storage="RowStore">
+                                    <DefinedValues>
+                                      <DefinedValue>
+                                        <ColumnReference Database="[RestaurantReservationDB]" Schema="[dbo]" Table="[OrderItems]" Alias="[oi]" Column="OrderItemId"></ColumnReference>
+                                      </DefinedValue>
+                                    </DefinedValues>
+                                    <Object Database="[RestaurantReservationDB]" Schema="[dbo]" Table="[OrderItems]" Index="[OrderItems_OrderId]" Alias="[oi]" IndexKind="NonClustered" Storage="RowStore"></Object>
+                                    <SeekPredicates>
+                                      <SeekPredicateNew>
+                                        <SeekKeys>
+                                          <Prefix ScanType="EQ">
+                                            <RangeColumns>
+                                              <ColumnReference Database="[RestaurantReservationDB]" Schema="[dbo]" Table="[OrderItems]" Alias="[oi]" Column="OrderId"></ColumnReference>
+                                            </RangeColumns>
+                                            <RangeExpressions>
+                                              <ScalarOperator ScalarString="[RestaurantReservationDB].[dbo].[Orders].[OrderId] as [o].[OrderId]">
+                                                <Identifier>
+                                                  <ColumnReference Database="[RestaurantReservationDB]" Schema="[dbo]" Table="[Orders]" Alias="[o]" Column="OrderId"></ColumnReference>
+                                                </Identifier>
+                                              </ScalarOperator>
+                                            </RangeExpressions>
+                                          </Prefix>
+                                        </SeekKeys>
+                                      </SeekPredicateNew>
+                                    </SeekPredicates>
+                                  </IndexScan>
+                                </RelOp>
+                              </NestedLoops>
+                            </RelOp>
+                            <RelOp NodeId="8" PhysicalOp="Clustered Index Seek" LogicalOp="Clustered Index Seek" EstimateRows="1" EstimateIO="0.003125" EstimateCPU="0.0001581" AvgRowSize="15" EstimatedTotalSubtreeCost="0.0121634" TableCardinality="1500" Parallel="0" EstimateRebinds="5" EstimateRewinds="0" EstimatedExecutionMode="Row">
+                              <OutputList>
+                                <ColumnReference Database="[RestaurantReservationDB]" Schema="[dbo]" Table="[OrderItems]" Alias="[oi]" Column="ItemId"></ColumnReference>
+                                <ColumnReference Database="[RestaurantReservationDB]" Schema="[dbo]" Table="[OrderItems]" Alias="[oi]" Column="Quantity"></ColumnReference>
+                              </OutputList>
+                              <IndexScan Lookup="1" Ordered="1" ScanDirection="FORWARD" ForcedIndex="0" ForceSeek="0" ForceScan="0" NoExpandHint="0" Storage="RowStore">
+                                <DefinedValues>
+                                  <DefinedValue>
+                                    <ColumnReference Database="[RestaurantReservationDB]" Schema="[dbo]" Table="[OrderItems]" Alias="[oi]" Column="ItemId"></ColumnReference>
+                                  </DefinedValue>
+                                  <DefinedValue>
+                                    <ColumnReference Database="[RestaurantReservationDB]" Schema="[dbo]" Table="[OrderItems]" Alias="[oi]" Column="Quantity"></ColumnReference>
+                                  </DefinedValue>
+                                </DefinedValues>
+                                <Object Database="[RestaurantReservationDB]" Schema="[dbo]" Table="[OrderItems]" Index="[PK__OrderIte__57ED0681BAEBC963]" Alias="[oi]" TableReferenceId="-1" IndexKind="Clustered" Storage="RowStore"></Object>
+                                <SeekPredicates>
+                                  <SeekPredicateNew>
+                                    <SeekKeys>
+                                      <Prefix ScanType="EQ">
+                                        <RangeColumns>
+                                          <ColumnReference Database="[RestaurantReservationDB]" Schema="[dbo]" Table="[OrderItems]" Alias="[oi]" Column="OrderItemId"></ColumnReference>
+                                        </RangeColumns>
+                                        <RangeExpressions>
+                                          <ScalarOperator ScalarString="[RestaurantReservationDB].[dbo].[OrderItems].[OrderItemId] as [oi].[OrderItemId]">
+                                            <Identifier>
+                                              <ColumnReference Database="[RestaurantReservationDB]" Schema="[dbo]" Table="[OrderItems]" Alias="[oi]" Column="OrderItemId"></ColumnReference>
+                                            </Identifier>
+                                          </ScalarOperator>
+                                        </RangeExpressions>
+                                      </Prefix>
+                                    </SeekKeys>
+                                  </SeekPredicateNew>
+                                </SeekPredicates>
+                              </IndexScan>
+                            </RelOp>
+                          </NestedLoops>
+                        </RelOp>
+                      </ComputeScalar>
+                    </RelOp>
+                    <RelOp NodeId="9" PhysicalOp="Clustered Index Seek" LogicalOp="Clustered Index Seek" EstimateRows="1" EstimatedRowsRead="1" EstimateIO="0.003125" EstimateCPU="0.0001581" AvgRowSize="172" EstimatedTotalSubtreeCost="0.014488" TableCardinality="1000" Parallel="0" EstimateRebinds="4.99674" EstimateRewinds="0.0032618" EstimatedExecutionMode="Row">
+                      <OutputList>
+                        <ColumnReference Database="[RestaurantReservationDB]" Schema="[dbo]" Table="[MenuItems]" Alias="[mi]" Column="Name"></ColumnReference>
+                        <ColumnReference Database="[RestaurantReservationDB]" Schema="[dbo]" Table="[MenuItems]" Alias="[mi]" Column="Description"></ColumnReference>
+                        <ColumnReference Database="[RestaurantReservationDB]" Schema="[dbo]" Table="[MenuItems]" Alias="[mi]" Column="Price"></ColumnReference>
+                      </OutputList>
+                      <IndexScan Ordered="1" ScanDirection="FORWARD" ForcedIndex="0" ForceSeek="0" ForceScan="0" NoExpandHint="0" Storage="RowStore">
+                        <DefinedValues>
+                          <DefinedValue>
+                            <ColumnReference Database="[RestaurantReservationDB]" Schema="[dbo]" Table="[MenuItems]" Alias="[mi]" Column="Name"></ColumnReference>
+                          </DefinedValue>
+                          <DefinedValue>
+                            <ColumnReference Database="[RestaurantReservationDB]" Schema="[dbo]" Table="[MenuItems]" Alias="[mi]" Column="Description"></ColumnReference>
+                          </DefinedValue>
+                          <DefinedValue>
+                            <ColumnReference Database="[RestaurantReservationDB]" Schema="[dbo]" Table="[MenuItems]" Alias="[mi]" Column="Price"></ColumnReference>
+                          </DefinedValue>
+                        </DefinedValues>
+                        <Object Database="[RestaurantReservationDB]" Schema="[dbo]" Table="[MenuItems]" Index="[PK__MenuItem__727E838B98BFAFC1]" Alias="[mi]" IndexKind="Clustered" Storage="RowStore"></Object>
+                        <SeekPredicates>
+                          <SeekPredicateNew>
+                            <SeekKeys>
+                              <Prefix ScanType="EQ">
+                                <RangeColumns>
+                                  <ColumnReference Database="[RestaurantReservationDB]" Schema="[dbo]" Table="[MenuItems]" Alias="[mi]" Column="ItemId"></ColumnReference>
+                                </RangeColumns>
+                                <RangeExpressions>
+                                  <ScalarOperator ScalarString="[RestaurantReservationDB].[dbo].[OrderItems].[ItemId] as [oi].[ItemId]">
+                                    <Identifier>
+                                      <ColumnReference Database="[RestaurantReservationDB]" Schema="[dbo]" Table="[OrderItems]" Alias="[oi]" Column="ItemId"></ColumnReference>
+                                    </Identifier>
+                                  </ScalarOperator>
+                                </RangeExpressions>
+                              </Prefix>
+                            </SeekKeys>
+                          </SeekPredicateNew>
+                        </SeekPredicates>
+                      </IndexScan>
+                    </RelOp>
+                  </NestedLoops>
+                </RelOp>
+              </ComputeScalar>
+            </RelOp>
+          </QueryPlan>
+        </StmtSimple>
+      </Statements>
+    </Batch>
+  </BatchSequence>
+</ShowPlanXML>

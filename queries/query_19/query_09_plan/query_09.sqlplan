@@ -1,0 +1,217 @@
+<ShowPlanXML xmlns="http://schemas.microsoft.com/sqlserver/2004/07/showplan" Version="1.599" Build="17.0.1000.7">
+  <BatchSequence>
+    <Batch>
+      <Statements>
+        <StmtSimple StatementText="&#xD;&#xA;WITH Reservation_Count_CTE AS (&#xD;&#xA;  SELECT COUNT(RestaurantId) AS ReservationsCount, RestaurantId  FROM Reservations  GROUP BY RestaurantId&#xD;&#xA;)&#xD;&#xA;&#xD;&#xA;SELECT r.RestaurantId, r.Name, rr.ReservationsCount AS HighRankRestaurant &#xD;&#xA;FROM Reservation_Count_CTE rr &#xD;&#xA;INNER JOIN Restaurants r ON rr.RestaurantId = r.RestaurantId&#xD;&#xA;WHERE rr.ReservationsCount = (SELECT MAX(ReservationsCount) FROM Reservation_Count_CTE)" StatementId="1" StatementCompId="1" StatementType="SELECT" RetrievedFromCache="false" StatementSubTreeCost="0.0119" StatementEstRows="1" SecurityPolicyApplied="false" StatementOptmLevel="FULL" QueryHash="0x3F2382AA7E89AE16" QueryPlanHash="0x5FACAB4B9D7516AB" StatementOptmEarlyAbortReason="GoodEnoughPlanFound" CardinalityEstimationModelVersion="170">
+          <StatementSetOptions QUOTED_IDENTIFIER="true" ARITHABORT="true" CONCAT_NULL_YIELDS_NULL="true" ANSI_NULLS="true" ANSI_PADDING="true" ANSI_WARNINGS="true" NUMERIC_ROUNDABORT="false"></StatementSetOptions>
+          <QueryPlan CachedPlanSize="40" CompileTime="13" CompileCPU="13" CompileMemory="528">
+            <MemoryGrantInfo SerialRequiredMemory="0" SerialDesiredMemory="0" GrantedMemory="0" MaxUsedMemory="0"></MemoryGrantInfo>
+            <OptimizerHardwareDependentProperties EstimatedAvailableMemoryGrant="165303" EstimatedPagesCached="206629" EstimatedAvailableDegreeOfParallelism="10" MaxCompileMemory="8529040"></OptimizerHardwareDependentProperties>
+            <OptimizerStatsUsage>
+              <StatisticsInfo LastUpdate="2026-07-29T13:31:51.56" ModificationCount="400" SamplingPercent="100" Statistics="[PK__Restaura__87454C959B021AF8]" Table="[Restaurants]" Schema="[dbo]" Database="[RestaurantReservationDB]"></StatisticsInfo>
+              <StatisticsInfo LastUpdate="2026-08-02T12:29:09.58" ModificationCount="0" SamplingPercent="100" Statistics="[Reservations_RestaurantId]" Table="[Reservations]" Schema="[dbo]" Database="[RestaurantReservationDB]"></StatisticsInfo>
+            </OptimizerStatsUsage>
+            <RelOp NodeId="0" PhysicalOp="Nested Loops" LogicalOp="Inner Join" EstimateRows="1" EstimateIO="0" EstimateCPU="4.18e-06" AvgRowSize="69" EstimatedTotalSubtreeCost="0.0119" Parallel="0" EstimateRebinds="0" EstimateRewinds="0" EstimatedExecutionMode="Row">
+              <OutputList>
+                <ColumnReference Column="Expr1002"></ColumnReference>
+                <ColumnReference Database="[RestaurantReservationDB]" Schema="[dbo]" Table="[Restaurants]" Alias="[r]" Column="RestaurantId"></ColumnReference>
+                <ColumnReference Database="[RestaurantReservationDB]" Schema="[dbo]" Table="[Restaurants]" Alias="[r]" Column="Name"></ColumnReference>
+              </OutputList>
+              <NestedLoops Optimized="0">
+                <OuterReferences>
+                  <ColumnReference Database="[RestaurantReservationDB]" Schema="[dbo]" Table="[Reservations]" Column="RestaurantId"></ColumnReference>
+                </OuterReferences>
+                <RelOp NodeId="1" PhysicalOp="Nested Loops" LogicalOp="Inner Join" EstimateRows="1" EstimateIO="0" EstimateCPU="0.000209" AvgRowSize="15" EstimatedTotalSubtreeCost="0.0086127" Parallel="0" EstimateRebinds="0" EstimateRewinds="0" EstimatedExecutionMode="Row">
+                  <OutputList>
+                    <ColumnReference Database="[RestaurantReservationDB]" Schema="[dbo]" Table="[Reservations]" Column="RestaurantId"></ColumnReference>
+                    <ColumnReference Column="Expr1002"></ColumnReference>
+                  </OutputList>
+                  <NestedLoops Optimized="0">
+                    <Predicate>
+                      <ScalarOperator ScalarString="[Expr1007]=[Expr1002]">
+                        <Compare CompareOp="EQ">
+                          <ScalarOperator>
+                            <Identifier>
+                              <ColumnReference Column="Expr1007"></ColumnReference>
+                            </Identifier>
+                          </ScalarOperator>
+                          <ScalarOperator>
+                            <Identifier>
+                              <ColumnReference Column="Expr1002"></ColumnReference>
+                            </Identifier>
+                          </ScalarOperator>
+                        </Compare>
+                      </ScalarOperator>
+                    </Predicate>
+                    <RelOp NodeId="2" PhysicalOp="Stream Aggregate" LogicalOp="Aggregate" EstimateRows="1" EstimateIO="0" EstimateCPU="3.05e-05" AvgRowSize="11" EstimatedTotalSubtreeCost="0.0042096" Parallel="0" EstimateRebinds="0" EstimateRewinds="0" EstimatedExecutionMode="Row">
+                      <OutputList>
+                        <ColumnReference Column="Expr1007"></ColumnReference>
+                      </OutputList>
+                      <StreamAggregate>
+                        <DefinedValues>
+                          <DefinedValue>
+                            <ColumnReference Column="Expr1007"></ColumnReference>
+                            <ScalarOperator ScalarString="MAX([Expr1006])">
+                              <Aggregate Distinct="0" AggType="MAX">
+                                <ScalarOperator>
+                                  <Identifier>
+                                    <ColumnReference Column="Expr1006"></ColumnReference>
+                                  </Identifier>
+                                </ScalarOperator>
+                              </Aggregate>
+                            </ScalarOperator>
+                          </DefinedValue>
+                        </DefinedValues>
+                        <RelOp NodeId="3" PhysicalOp="Compute Scalar" LogicalOp="Compute Scalar" EstimateRows="50" EstimateIO="0" EstimateCPU="0" AvgRowSize="11" EstimatedTotalSubtreeCost="0.0041791" Parallel="0" EstimateRebinds="0" EstimateRewinds="0" EstimatedExecutionMode="Row">
+                          <OutputList>
+                            <ColumnReference Column="Expr1006"></ColumnReference>
+                          </OutputList>
+                          <ComputeScalar>
+                            <DefinedValues>
+                              <DefinedValue>
+                                <ColumnReference Column="Expr1006"></ColumnReference>
+                                <ScalarOperator ScalarString="CONVERT_IMPLICIT(int,[Expr1014],0)">
+                                  <Convert DataType="int" Style="0" Implicit="1">
+                                    <ScalarOperator>
+                                      <Identifier>
+                                        <ColumnReference Column="Expr1014"></ColumnReference>
+                                      </Identifier>
+                                    </ScalarOperator>
+                                  </Convert>
+                                </ScalarOperator>
+                              </DefinedValue>
+                            </DefinedValues>
+                            <RelOp NodeId="4" PhysicalOp="Stream Aggregate" LogicalOp="Aggregate" EstimateRows="50" EstimateIO="0" EstimateCPU="0.0003328" AvgRowSize="11" EstimatedTotalSubtreeCost="0.0041791" Parallel="0" EstimateRebinds="0" EstimateRewinds="0" EstimatedExecutionMode="Row">
+                              <OutputList>
+                                <ColumnReference Column="Expr1014"></ColumnReference>
+                              </OutputList>
+                              <StreamAggregate>
+                                <DefinedValues>
+                                  <DefinedValue>
+                                    <ColumnReference Column="Expr1014"></ColumnReference>
+                                    <ScalarOperator ScalarString="Count(*)">
+                                      <Aggregate AggType="countstar" Distinct="0"></Aggregate>
+                                    </ScalarOperator>
+                                  </DefinedValue>
+                                </DefinedValues>
+                                <GroupBy>
+                                  <ColumnReference Database="[RestaurantReservationDB]" Schema="[dbo]" Table="[Reservations]" Column="RestaurantId"></ColumnReference>
+                                </GroupBy>
+                                <RelOp NodeId="5" PhysicalOp="Index Scan" LogicalOp="Index Scan" EstimateRows="513" EstimatedRowsRead="513" EstimateIO="0.003125" EstimateCPU="0.0007213" AvgRowSize="11" EstimatedTotalSubtreeCost="0.0038463" TableCardinality="513" Parallel="0" EstimateRebinds="0" EstimateRewinds="0" EstimatedExecutionMode="Row">
+                                  <OutputList>
+                                    <ColumnReference Database="[RestaurantReservationDB]" Schema="[dbo]" Table="[Reservations]" Column="RestaurantId"></ColumnReference>
+                                  </OutputList>
+                                  <IndexScan Ordered="1" ScanDirection="FORWARD" ForcedIndex="0" ForceSeek="0" ForceScan="0" NoExpandHint="0" Storage="RowStore">
+                                    <DefinedValues>
+                                      <DefinedValue>
+                                        <ColumnReference Database="[RestaurantReservationDB]" Schema="[dbo]" Table="[Reservations]" Column="RestaurantId"></ColumnReference>
+                                      </DefinedValue>
+                                    </DefinedValues>
+                                    <Object Database="[RestaurantReservationDB]" Schema="[dbo]" Table="[Reservations]" Index="[Reservations_RestaurantId]" TableReferenceId="2" IndexKind="NonClustered" Storage="RowStore"></Object>
+                                  </IndexScan>
+                                </RelOp>
+                              </StreamAggregate>
+                            </RelOp>
+                          </ComputeScalar>
+                        </RelOp>
+                      </StreamAggregate>
+                    </RelOp>
+                    <RelOp NodeId="6" PhysicalOp="Compute Scalar" LogicalOp="Compute Scalar" EstimateRows="50" EstimateIO="0" EstimateCPU="0" AvgRowSize="15" EstimatedTotalSubtreeCost="0.0041791" Parallel="0" EstimateRebinds="0" EstimateRewinds="0" EstimatedExecutionMode="Row">
+                      <OutputList>
+                        <ColumnReference Database="[RestaurantReservationDB]" Schema="[dbo]" Table="[Reservations]" Column="RestaurantId"></ColumnReference>
+                        <ColumnReference Column="Expr1002"></ColumnReference>
+                      </OutputList>
+                      <ComputeScalar>
+                        <DefinedValues>
+                          <DefinedValue>
+                            <ColumnReference Column="Expr1002"></ColumnReference>
+                            <ScalarOperator ScalarString="CONVERT_IMPLICIT(int,[Expr1015],0)">
+                              <Convert DataType="int" Style="0" Implicit="1">
+                                <ScalarOperator>
+                                  <Identifier>
+                                    <ColumnReference Column="Expr1015"></ColumnReference>
+                                  </Identifier>
+                                </ScalarOperator>
+                              </Convert>
+                            </ScalarOperator>
+                          </DefinedValue>
+                        </DefinedValues>
+                        <RelOp NodeId="7" PhysicalOp="Stream Aggregate" LogicalOp="Aggregate" EstimateRows="50" EstimateIO="0" EstimateCPU="0.0003328" AvgRowSize="15" EstimatedTotalSubtreeCost="0.0041791" Parallel="0" EstimateRebinds="0" EstimateRewinds="0" EstimatedExecutionMode="Row">
+                          <OutputList>
+                            <ColumnReference Database="[RestaurantReservationDB]" Schema="[dbo]" Table="[Reservations]" Column="RestaurantId"></ColumnReference>
+                            <ColumnReference Column="Expr1015"></ColumnReference>
+                          </OutputList>
+                          <StreamAggregate>
+                            <DefinedValues>
+                              <DefinedValue>
+                                <ColumnReference Column="Expr1015"></ColumnReference>
+                                <ScalarOperator ScalarString="Count(*)">
+                                  <Aggregate AggType="countstar" Distinct="0"></Aggregate>
+                                </ScalarOperator>
+                              </DefinedValue>
+                            </DefinedValues>
+                            <GroupBy>
+                              <ColumnReference Database="[RestaurantReservationDB]" Schema="[dbo]" Table="[Reservations]" Column="RestaurantId"></ColumnReference>
+                            </GroupBy>
+                            <RelOp NodeId="8" PhysicalOp="Index Scan" LogicalOp="Index Scan" EstimateRows="513" EstimatedRowsRead="513" EstimateIO="0.003125" EstimateCPU="0.0007213" AvgRowSize="11" EstimatedTotalSubtreeCost="0.0038463" TableCardinality="513" Parallel="0" EstimateRebinds="0" EstimateRewinds="0" EstimatedExecutionMode="Row">
+                              <OutputList>
+                                <ColumnReference Database="[RestaurantReservationDB]" Schema="[dbo]" Table="[Reservations]" Column="RestaurantId"></ColumnReference>
+                              </OutputList>
+                              <IndexScan Ordered="1" ScanDirection="FORWARD" ForcedIndex="0" ForceSeek="0" ForceScan="0" NoExpandHint="0" Storage="RowStore">
+                                <DefinedValues>
+                                  <DefinedValue>
+                                    <ColumnReference Database="[RestaurantReservationDB]" Schema="[dbo]" Table="[Reservations]" Column="RestaurantId"></ColumnReference>
+                                  </DefinedValue>
+                                </DefinedValues>
+                                <Object Database="[RestaurantReservationDB]" Schema="[dbo]" Table="[Reservations]" Index="[Reservations_RestaurantId]" TableReferenceId="1" IndexKind="NonClustered" Storage="RowStore"></Object>
+                              </IndexScan>
+                            </RelOp>
+                          </StreamAggregate>
+                        </RelOp>
+                      </ComputeScalar>
+                    </RelOp>
+                  </NestedLoops>
+                </RelOp>
+                <RelOp NodeId="9" PhysicalOp="Clustered Index Seek" LogicalOp="Clustered Index Seek" EstimateRows="1" EstimatedRowsRead="1" EstimateIO="0.003125" EstimateCPU="0.0001581" AvgRowSize="65" EstimatedTotalSubtreeCost="0.0032831" TableCardinality="50" Parallel="0" EstimateRebinds="0" EstimateRewinds="0" EstimatedExecutionMode="Row">
+                  <OutputList>
+                    <ColumnReference Database="[RestaurantReservationDB]" Schema="[dbo]" Table="[Restaurants]" Alias="[r]" Column="RestaurantId"></ColumnReference>
+                    <ColumnReference Database="[RestaurantReservationDB]" Schema="[dbo]" Table="[Restaurants]" Alias="[r]" Column="Name"></ColumnReference>
+                  </OutputList>
+                  <IndexScan Ordered="1" ScanDirection="FORWARD" ForcedIndex="0" ForceSeek="0" ForceScan="0" NoExpandHint="0" Storage="RowStore">
+                    <DefinedValues>
+                      <DefinedValue>
+                        <ColumnReference Database="[RestaurantReservationDB]" Schema="[dbo]" Table="[Restaurants]" Alias="[r]" Column="RestaurantId"></ColumnReference>
+                      </DefinedValue>
+                      <DefinedValue>
+                        <ColumnReference Database="[RestaurantReservationDB]" Schema="[dbo]" Table="[Restaurants]" Alias="[r]" Column="Name"></ColumnReference>
+                      </DefinedValue>
+                    </DefinedValues>
+                    <Object Database="[RestaurantReservationDB]" Schema="[dbo]" Table="[Restaurants]" Index="[PK__Restaura__87454C959B021AF8]" Alias="[r]" IndexKind="Clustered" Storage="RowStore"></Object>
+                    <SeekPredicates>
+                      <SeekPredicateNew>
+                        <SeekKeys>
+                          <Prefix ScanType="EQ">
+                            <RangeColumns>
+                              <ColumnReference Database="[RestaurantReservationDB]" Schema="[dbo]" Table="[Restaurants]" Alias="[r]" Column="RestaurantId"></ColumnReference>
+                            </RangeColumns>
+                            <RangeExpressions>
+                              <ScalarOperator ScalarString="[RestaurantReservationDB].[dbo].[Reservations].[RestaurantId]">
+                                <Identifier>
+                                  <ColumnReference Database="[RestaurantReservationDB]" Schema="[dbo]" Table="[Reservations]" Column="RestaurantId"></ColumnReference>
+                                </Identifier>
+                              </ScalarOperator>
+                            </RangeExpressions>
+                          </Prefix>
+                        </SeekKeys>
+                      </SeekPredicateNew>
+                    </SeekPredicates>
+                  </IndexScan>
+                </RelOp>
+              </NestedLoops>
+            </RelOp>
+          </QueryPlan>
+        </StmtSimple>
+      </Statements>
+    </Batch>
+  </BatchSequence>
+</ShowPlanXML>
